@@ -1,0 +1,7 @@
+model_class: two_layer_nn.Two_Layer_NN
+config:
+  n_x: 12288     # num_px * num_px * 3
+  n_h: 7
+  n_y: 1
+  # layers_dims: (n_x, n_h, n_y)
+
