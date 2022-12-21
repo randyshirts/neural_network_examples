@@ -6,6 +6,13 @@ import yaml
 from dnn_utils import load_data
 
 
+class InvalidConfigFileTypeError(Exception):
+    
+    def __init__(self, config_file: str, msg: str):
+        self.config_file = config_file
+        self.message = msg
+        super().__init__(self.message)    
+
 def show_example_image(index=15, training_data=None, training_labels=None, classifications=None):
     # Show an example picture
     # Example of a picture
@@ -40,7 +47,7 @@ def flatten_image_data(original_images=None):
     return flattened_image_features
 
 
-def test_external_image(num_pixels, parameters, classifications, model):
+def sample_external_image(num_pixels, parameters, classifications, model):
     import imageio.v2 as imageio
     import PIL
 
@@ -107,13 +114,63 @@ def train(configs=None):
 
     # Test an image external to train and test data
     num_px = train_x_orig.shape[1]
-    test_external_image(num_pixels=num_px, parameters=parameters, classifications=classes, model=model)
+    sample_external_image(num_pixels=num_px, parameters=parameters, classifications=classes, model=model)
 
-def model_factory(model_class:str)->object:
-    module_name, class_name = model_class.split('.', -1)
-    module = importlib.import_module(module_name)
-    class_ = getattr(module, class_name)
-    return class_()
+class InvalidModelFactoryArgument(Exception):
+  
+    def __init__(self, argument: str, msg: str):
+        self.argument = argument
+        self.message = msg
+        super().__init__(self.message)
+
+def model_factory(model_class_name:str)->object:
+    # Guard clause
+    if model_class_name is None:
+        raise InvalidModelFactoryArgument(
+            argument = model_class_name,
+            msg = f"model class not provided to the model factory. argument: {model_class_name}")
+    
+    # Get the module
+    module_class = None
+    class_name = None
+    try:
+        module_name, class_name = model_class_name.rsplit('.', 1)
+        module = importlib.import_module(module_name)
+    except (AttributeError, ModuleNotFoundError):
+        raise InvalidModelFactoryArgument(
+            argument = model_class_name,
+            msg = f"Invalid module provided to the model factory. argument: {model_class_name}")
+    
+    # Get the class
+    try:
+        model_class = getattr(module, class_name)
+    except AttributeError:
+        raise InvalidModelFactoryArgument(
+            argument = class_name,
+            msg = f"Invalid class provided to the model factory. argument: {class_name}")
+
+    # Return an instance of the class
+    return model_class()
+
+def retrieve_configs(config_file: str) -> dict:
+    """
+    Takes a file path and returns a dictionary 
+    """
+    config_values = None
+    try:
+        with open(config_file, 'r') as f:
+            config_values = yaml.load(f, Loader=yaml.FullLoader)
+    except TypeError:
+        raise InvalidConfigFileTypeError(
+            config_file=config_file,
+            msg = f"Expected a config file of type yaml. file: {config_file}"
+            ) 
+    except yaml.scanner.ScannerError:
+        raise InvalidConfigFileTypeError(
+            config_file=config_file,
+            msg = f"Invalid yaml within supplied config file. file: {config_file}"
+            )
+    return config_values
 
 def main():
     # Initialize parser
@@ -127,11 +184,7 @@ def main():
     args = parser.parse_args()
     
     # Parse yaml to obtain config values as dict
-    config_values = None
-    if args.Config:
-        print(f"Configuration file path: {args.Config}")
-        with open(args.Config, 'r') as f:
-            config_values = yaml.load(f, Loader=yaml.FullLoader)
+    config_values = retrieve_configs(args.Config) if args.Config else None
 
     # Train the model, evaluate, and sample the trained model
     train(config_values)
