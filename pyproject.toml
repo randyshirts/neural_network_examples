@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "neural_network_examples"
+version = "0.0.1"
+description = "Exploring neural networks and ML in general"
+authors = ["randyshirts <randy.shirts@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "feed_forward/image_classification/image_classification.py" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.24.0"
+matplotlib = "^3.6.2"
+PyYAML = "^6.0"
+argparse = "^1.4.0"
+importlib = "^1.0.4"
+h5py = "^3.7.0"
+pytest = "*"
+imageio = "^2.23.0"
+
+
+[tool.poetry.scripts]
+image-classification = "image_classification:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
