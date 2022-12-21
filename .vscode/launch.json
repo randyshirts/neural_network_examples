@@ -20,6 +20,30 @@
             "justMyCode": true,
             "cwd": "${workspaceFolder}/feed_forward/image_classification/",
             "args": ["${file}"]
-        }
+        },
+        {
+            "name": "Image Classifiaction - n-layer",
+            "type": "python",
+            "request": "launch",
+            "module": "image_classification",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/feed_forward/image_classification/",
+            "args": [
+                "-c",
+                "n_layer.yaml"    
+            ]
+        },
+        {
+            "name": "Image Classifiaction - 2-layer",
+            "type": "python",
+            "request": "launch",
+            "module": "image_classification",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/feed_forward/image_classification/",
+            "args": [
+                "-c",
+                "two_layer.yaml"    
+            ]
+        },
     ]
 }
