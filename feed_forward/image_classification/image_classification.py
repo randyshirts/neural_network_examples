@@ -8,12 +8,12 @@ from dnn_utils import load_data
 
 class InvalidConfigFileTypeError(Exception):
     
-    def __init__(self, config_file: str, msg: str):
+    def __init__(self, config_file: str, msg: str) -> None:
         self.config_file = config_file
         self.message = msg
         super().__init__(self.message)    
 
-def show_example_image(index=15, training_data=None, training_labels=None, classifications=None):
+def show_example_image(index: int=15, training_data=None, training_labels=None, classifications=None) -> None:
     # Show an example picture
     # Example of a picture
     plt.imshow(training_data[index])
@@ -37,7 +37,7 @@ def display_dataset_info(training_data=None, training_labels=None, test_labels=N
     print ("test_y shape: " + str(test_labels.shape))
 
 
-def flatten_image_data(original_images=None):
+def flatten_image_data(original_images: list[int, int, int]=None) -> list:
     # Reshape the training and test examples 
     flattened_data = original_images.reshape(original_images.shape[0], -1).T   # The "-1" makes reshape flatten the remaining dimensions
 
@@ -47,7 +47,7 @@ def flatten_image_data(original_images=None):
     return flattened_image_features
 
 
-def sample_external_image(num_pixels, parameters, classifications, model):
+def sample_external_image(num_pixels: int, parameters: list, classifications: list, model: object) -> None:
     import imageio.v2 as imageio
     import PIL
 
@@ -63,7 +63,7 @@ def sample_external_image(num_pixels, parameters, classifications, model):
     print ("y = " + str(np.squeeze(my_predicted_image)) + ", your L-layer model predicts a \"" + classifications[int(np.squeeze(my_predicted_image)),].decode("utf-8") +  "\" picture.")
     plt.show()
 
-def train(configs=None):
+def train(configs:dict=None) -> None:
     
     # Set default values
     if configs is None:
@@ -124,6 +124,9 @@ class InvalidModelFactoryArgument(Exception):
         super().__init__(self.message)
 
 def model_factory(model_class_name:str)->object:
+    """
+    Creates a model instance from a string
+    """
     # Guard clause
     if model_class_name is None:
         raise InvalidModelFactoryArgument(

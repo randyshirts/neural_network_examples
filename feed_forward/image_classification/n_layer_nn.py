@@ -3,10 +3,21 @@ import numpy as np
 import dnn_utils as dnn_utils
 
 class N_Layer_NN():
-    def predict(self, X, y, parameters):
+    def predict(self, X, y, parameters) -> np.array:
+        """
+        This function is used to predict the results of a  N-layer neural network.
+    
+        Arguments:
+        X -- data set of examples you would like to label
+        y -- labels for the given data set
+        parameters -- parameters of the trained model
+        
+        Returns:
+        p -- predictions for the given dataset X
+        """
         return dnn_utils.predict(X, y, parameters, dnn_utils.n_model_forward)
 
-    def initialize_parameters_deep(self, layer_dims):
+    def initialize_parameters_deep(self, layer_dims: list) -> dict:
         """
         Arguments:
         layer_dims -- python array (list) containing the dimensions of each layer in our network
@@ -31,7 +42,7 @@ class N_Layer_NN():
             
         return parameters
 
-    def n_model_backward(self, AL, Y, caches):
+    def n_model_backward(self, AL, Y, caches) -> dict[str, float]:
         """
         Implement the backward propagation for the [LINEAR->RELU] * (L-1) -> LINEAR -> SIGMOID group
         
@@ -70,7 +81,7 @@ class N_Layer_NN():
 
         return grads
 
-    def model(self, X, Y, layers_dims, learning_rate = 0.0075, num_iterations = 3000, print_cost=False):#lr was 0.009
+    def model(self, X, Y, layers_dims: list[int], learning_rate: float = 0.0075, num_iterations: int = 3000, print_cost: bool =False) -> dict[str, float]:#lr was 0.009
         """
         Implements a L-layer neural network: [LINEAR->RELU]*(L-1)->LINEAR->SIGMOID.
         
