@@ -1,7 +1,8 @@
 import argparse
-import numpy as np
 import importlib
+
 import matplotlib.pyplot as plt
+import numpy as np
 import yaml
 from dnn_utils import load_data
 

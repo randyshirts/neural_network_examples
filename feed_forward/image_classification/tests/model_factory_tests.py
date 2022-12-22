@@ -1,6 +1,5 @@
 import pytest
-
-from image_classification import model_factory, InvalidModelFactoryArgument
+from image_classification import InvalidModelFactoryArgument, model_factory
 
 
 def test_model_factory_happy_case():

@@ -1,6 +1,6 @@
+import dnn_utils as dnn_utils
 import matplotlib.pyplot as plt
 import numpy as np
-import dnn_utils as dnn_utils
 
 
 class Two_Layer_NN:

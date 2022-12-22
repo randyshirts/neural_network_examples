@@ -1,5 +1,5 @@
 import pytest
-from image_classification import retrieve_configs, InvalidConfigFileTypeError
+from image_classification import InvalidConfigFileTypeError, retrieve_configs
 
 
 def test_n_layer_args_happy_case():
