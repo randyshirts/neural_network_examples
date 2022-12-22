@@ -115,7 +115,7 @@ def train(configs: dict = None) -> None:
     # print ("train_x's shape: " + str(train_x.shape))
     # print ("test_x's shape: " + str(test_x.shape))
 
-    ### Get model parameters from config file ####
+    # Get model parameters from config file
     if "n_x" in configs["config"]:
         n_x = configs["config"]["n_x"]
     if "n_h" in configs["config"]:
@@ -135,8 +135,8 @@ def train(configs: dict = None) -> None:
         train_x, train_y, layers_dims, num_iterations=2500, print_cost=True
     )
     # Evaluate the model based on train data and then test data
-    pred_train = model.predict(train_x, train_y, parameters)
-    pred_test = model.predict(test_x, test_y, parameters)
+    _ = model.predict(train_x, train_y, parameters)
+    _ = model.predict(test_x, test_y, parameters)
 
     # Test an image external to train and test data
     num_px = train_x_orig.shape[1]
@@ -164,7 +164,7 @@ def model_factory(model_class_name: str) -> object:
         )
 
     # Get the module
-    module_class = None
+    _ = None
     class_name = None
     try:
         module_name, class_name = model_class_name.rsplit(".", 1)

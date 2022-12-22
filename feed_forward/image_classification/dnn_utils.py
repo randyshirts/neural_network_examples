@@ -106,12 +106,12 @@ def n_model_forward(X, parameters):
     L = len(parameters) // 2  # number of layers in the neural network
 
     # Implement [LINEAR -> RELU]*(L-1). Add "cache" to the "caches" list.
-    for l in range(1, L):
+    for layer in range(1, L):
         A_prev = A
         A, cache = linear_activation_forward(
             A_prev,
-            parameters["W" + str(l)],
-            parameters["b" + str(l)],
+            parameters["W" + str(layer)],
+            parameters["b" + str(layer)],
             activation="relu",
         )
         caches.append(cache)
@@ -330,12 +330,14 @@ def update_parameters(parameters, grads, learning_rate):
     L = len(parameters) // 2  # number of layers in the neural network
 
     # Update rule for each parameter. Use a for loop.
-    for l in range(L):
-        parameters["W" + str(l + 1)] = (
-            parameters["W" + str(l + 1)] - learning_rate * grads["dW" + str(l + 1)]
+    for layer in range(L):
+        parameters["W" + str(layer + 1)] = (
+            parameters["W" + str(layer + 1)]
+            - learning_rate * grads["dW" + str(layer + 1)]
         )
-        parameters["b" + str(l + 1)] = (
-            parameters["b" + str(l + 1)] - learning_rate * grads["db" + str(l + 1)]
+        parameters["b" + str(layer + 1)] = (
+            parameters["b" + str(layer + 1)]
+            - learning_rate * grads["db" + str(layer + 1)]
         )
 
     return parameters
@@ -354,11 +356,11 @@ def predict(X, y, parameters, forward_func):
     """
 
     m = X.shape[1]
-    n = len(parameters) // 2  # number of layers in the neural network
+    _ = len(parameters) // 2  # number of layers in the neural network
     p = np.zeros((1, m))
 
     # Forward propagation
-    probas, caches = forward_func(X, parameters)
+    probas, _ = forward_func(X, parameters)
 
     # convert probas to 0/1 predictions
     for i in range(0, probas.shape[1]):
