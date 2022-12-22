@@ -30,7 +30,7 @@
             "cwd": "${workspaceFolder}/feed_forward/image_classification/",
             "args": [
                 "-c",
-                "n_layer.yaml"    
+                "n_layer.yaml"
             ]
         },
         {
@@ -42,7 +42,7 @@
             "cwd": "${workspaceFolder}/feed_forward/image_classification/",
             "args": [
                 "-c",
-                "two_layer.yaml"    
+                "two_layer.yaml"
             ]
         },
     ]

@@ -4,4 +4,3 @@ config:
   n_h: 7
   n_y: 1
   # layers_dims: (n_x, n_h, n_y)
-

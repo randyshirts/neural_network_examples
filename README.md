@@ -12,7 +12,7 @@ poetry install
 `poetry run python -m pytest path/to/tests`
 
 or if a script has been created:
- 
+
 `poetry run image-classification`
 
 ### Updating poetry
