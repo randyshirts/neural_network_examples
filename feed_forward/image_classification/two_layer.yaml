@@ -4,3 +4,6 @@ config:
   n_h: 7
   n_y: 1
   # layers_dims: (n_x, n_h, n_y)
+  learning_rate: 0.008
+  num_iterations: 2500
+  print_cost: True
