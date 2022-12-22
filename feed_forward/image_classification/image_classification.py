@@ -194,7 +194,7 @@ def retrieve_configs(config_file: str) -> dict:
     """
     config_values = None
     try:
-        with open(config_file, "r") as f:
+        with open(config_file) as f:
             config_values = yaml.load(f, Loader=yaml.FullLoader)
     except TypeError:
         raise InvalidConfigFileTypeError(

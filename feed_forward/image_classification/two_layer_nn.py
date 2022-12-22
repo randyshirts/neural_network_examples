@@ -91,7 +91,7 @@ class Two_Layer_NN:
 
             # Print the cost every 100 training example
             if print_cost and i % 100 == 0:
-                print("Cost after iteration {}: {}".format(i, np.squeeze(cost)))
+                print(f"Cost after iteration {i}: {np.squeeze(cost)}")
             if print_cost and i % 100 == 0:
                 costs.append(cost)
 
