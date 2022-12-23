@@ -1,11 +1,23 @@
-import dnn_utils as dnn_utils
+import importlib
+
 import matplotlib.pyplot as plt
 import numpy as np
 
+import feed_forward.image_classification.manual.dnn_utils as dnn_utils
+
 
 class Two_Layer_NN:
+    def __init__(self):
+        self._eval = importlib.import_module(
+            "feed_forward.image_classification.manual.eval.manual_eval"
+        )
+
+    @property
+    def eval(self):
+        return self._eval
+
     def predict(self, X, y, parameters):
-        return dnn_utils.predict(X, y, parameters, dnn_utils.n_model_forward)
+        return self.eval.predict(X, y, parameters, dnn_utils.n_model_forward)
 
     def model(
         self,

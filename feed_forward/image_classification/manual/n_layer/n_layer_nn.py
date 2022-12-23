@@ -1,9 +1,21 @@
-import dnn_utils as dnn_utils
+import importlib
+
 import matplotlib.pyplot as plt
 import numpy as np
 
+import feed_forward.image_classification.manual.dnn_utils as dnn_utils
+
 
 class N_Layer_NN:
+    def __init__(self):
+        self._eval = importlib.import_module(
+            "feed_forward.image_classification.manual.eval.manual_eval"
+        )
+
+    @property
+    def eval(self):
+        return self._eval
+
     def predict(self, X, y, parameters) -> np.array:
         """
         This function is used to predict the results of a  N-layer neural network.
@@ -16,7 +28,7 @@ class N_Layer_NN:
         Returns:
         p -- predictions for the given dataset X
         """
-        return dnn_utils.predict(X, y, parameters, dnn_utils.n_model_forward)
+        return self.eval.predict(X, y, parameters, dnn_utils.n_model_forward)
 
     def initialize_parameters_deep(self, layer_dims: list) -> dict:
         """

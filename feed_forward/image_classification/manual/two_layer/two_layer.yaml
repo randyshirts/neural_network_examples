@@ -1,4 +1,5 @@
-model_class: two_layer_nn.Two_Layer_NN
+trainer: feed_forward.image_classification.image_classification
+model_class: feed_forward.image_classification.manual.two_layer.two_layer_nn.Two_Layer_NN
 config:
   n_x: 12288     # num_px * num_px * 3
   n_h: 7

@@ -25,12 +25,12 @@
             "name": "Image Classifiaction - n-layer",
             "type": "python",
             "request": "launch",
-            "module": "image_classification",
+            "module": "main",
             "justMyCode": true,
-            "cwd": "${workspaceFolder}/feed_forward/image_classification/",
+            "cwd": "${workspaceFolder}",
             "args": [
                 "-c",
-                "n_layer.yaml"
+                "feed_forward/image_classification/manual/n_layer/n_layer.yaml"
             ]
         },
         {
