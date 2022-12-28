@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  image_classification:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CONFIG_FILE: ${CONFIG_FILE}
+        USER_UID: ${UID}
+        USER_GID: ${GID}
+        USERNAME: ${USERNAME}
+    volumes:
+      - .:/app
+    image: "image_classification:0.0.1"
