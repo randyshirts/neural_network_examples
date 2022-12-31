@@ -3,10 +3,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def load_data():
-    train_dataset = h5py.File(
-        "feed_forward/image_classification/datasets/train_catvnoncat.h5", "r"
-    )
+def load_data(
+    train_file: str = "feed_forward/image_classification/datasets/train_catvnoncat.h5",
+    test_file: str = "feed_forward/image_classification/datasets/test_catvnoncat.h5",
+):
+    train_dataset = h5py.File(train_file, "r")
     train_set_x_orig = np.array(
         train_dataset["train_set_x"][:]
     )  # your train set features
@@ -14,9 +15,7 @@ def load_data():
         train_dataset["train_set_y"][:]
     )  # your train set labels
 
-    test_dataset = h5py.File(
-        "feed_forward/image_classification/datasets/test_catvnoncat.h5", "r"
-    )
+    test_dataset = h5py.File(test_file, "r")
     test_set_x_orig = np.array(test_dataset["test_set_x"][:])  # your test set features
     test_set_y_orig = np.array(test_dataset["test_set_y"][:])  # your test set labels
 

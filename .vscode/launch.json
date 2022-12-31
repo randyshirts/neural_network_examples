@@ -22,6 +22,14 @@
             "args": ["${file}"]
         },
         {
+            "name": "Image Classifiaction - pytorch",
+            "type": "python",
+            "request": "launch",
+            "module": "torch_model",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/feed_forward/image_classification/pytorch/"
+        },
+        {
             "name": "Image Classifiaction - n-layer",
             "type": "python",
             "request": "launch",
