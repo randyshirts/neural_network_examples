@@ -4,9 +4,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 import feed_forward.image_classification.manual.dnn_utils as dnn_utils
+from feed_forward.image_classification.model import Model
 
 
-class Two_Layer_NN:
+class Two_Layer_NN(Model):
     def __init__(self):
         self._eval = importlib.import_module(
             "feed_forward.image_classification.manual.eval.manual_eval"
@@ -16,18 +17,18 @@ class Two_Layer_NN:
     def eval(self):
         return self._eval
 
-    def predict(self, X, y, parameters):
+    def predict(self, X: np.array, y: np.array, parameters: dict[str, np.array]):
         return self.eval.predict(X, y, parameters, dnn_utils.n_model_forward)
 
     def model(
         self,
-        X,
-        Y,
-        layers_dims,
-        learning_rate=0.0075,
-        num_iterations=3000,
-        print_cost=False,
-    ):
+        X: np.array,
+        Y: np.array,
+        layers_dims: list[int],
+        learning_rate: float = 0.0075,
+        num_iterations: int = 3000,
+        print_cost: bool = False,
+    ) -> dict[str, float]:
         """
         Implements a two-layer neural network: LINEAR->RELU->LINEAR->SIGMOID.
 

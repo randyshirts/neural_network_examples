@@ -45,8 +45,7 @@ def train(configs: dict = None) -> None:
         lr = model_config["learning_rate"]
     if "num_iterations" in model_config:
         num_iterations = model_config["num_iterations"]
-    if "print_cost" in model_config:
-        print_cost = model_config["print_cost"]
+    print_cost = model_config.get("print_cost", False)
     if "n_x" in model_config:
         n_x = model_config["n_x"]
     if "n_h" in model_config:

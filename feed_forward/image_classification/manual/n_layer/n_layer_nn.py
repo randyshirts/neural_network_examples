@@ -4,9 +4,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 import feed_forward.image_classification.manual.dnn_utils as dnn_utils
+from feed_forward.image_classification.model import Model
 
 
-class N_Layer_NN:
+class N_Layer_NN(Model):
     def __init__(self):
         self._eval = importlib.import_module(
             "feed_forward.image_classification.manual.eval.manual_eval"
@@ -16,7 +17,9 @@ class N_Layer_NN:
     def eval(self):
         return self._eval
 
-    def predict(self, X, y, parameters) -> np.array:
+    def predict(
+        self, X: np.array, y: np.array, parameters: dict[str, np.array]
+    ) -> np.array:
         """
         This function is used to predict the results of a  N-layer neural network.
 
@@ -110,8 +113,8 @@ class N_Layer_NN:
 
     def model(
         self,
-        X,
-        Y,
+        X: np.array,
+        Y: np.array,
         layers_dims: list[int],
         learning_rate: float = 0.0075,
         num_iterations: int = 3000,
