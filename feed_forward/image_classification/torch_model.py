@@ -28,22 +28,10 @@ def torch_model():
     n_input = 12288
     n_hidden = 7
     n_out = 1
-    # batch_size = 209
     learning_rate = 0.008
     num_iterations = 2500
 
     # Get the data
-    # data_file, dataset_x, dataset_y = _load_h5_file_with_data("train_catvnoncat.h5")
-
-    # dataset_x is a h5py dataset, needs to be a tensor, use torch.from_numpy()?
-    # array_x = dataset_x[()]
-    # array_y = dataset_y[()]
-    # flattened_x = array_x.reshape(array_x.shape[0], -1)
-    # flattened_y = array_y.reshape(array_y.shape[0], -1)
-    # data_x = torch.from_numpy(flattened_x).float()
-    # data_y = torch.from_numpy(flattened_y).float()
-    # print(data_x.size())
-    # print(data_y.size())
     train_x, train_y, test_x, test_y, classes = load_data(
         train_file="datasets/train_catvnoncat.h5",
         test_file="datasets/test_catvnoncat.h5",
@@ -81,6 +69,7 @@ def torch_model():
 
         # Perform back-prop
         # Todo: Need to initialize grads like the two-layer model - occasionaly get exploding gradients and when we don't we get overfitting
+        model.zero_grad()
         loss.backward()
 
         # Perform optimization and update the parameters

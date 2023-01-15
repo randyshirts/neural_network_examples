@@ -1,0 +1,6 @@
+trainer: feed_forward.image_classification.image_classification
+model_class: feed_forward.image_classification.pytorch.torch_model.Torch_Two_Layer
+config:
+  layers_dims: [12288, 7, 1] #  5-layer model
+  learning_rate: 0.0075
+  num_iterations: 3000

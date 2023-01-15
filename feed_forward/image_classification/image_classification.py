@@ -70,7 +70,9 @@ def train(configs: dict = None) -> None:
         print_cost=print_cost,
     )
     # Evaluate the model based on train data and then test data
+    print("\nTraining:")
     _ = model.predict(train_x, train_y, parameters)
+    print("\nTest:")
     _ = model.predict(test_x, test_y, parameters)
 
     # Test an image external to train and test data
